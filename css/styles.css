@@ -1,9 +1,87 @@
+body {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+}
+
 header {
   background-color: rgb(10, 45, 130);
   color: white;
 }
 
+form {
+  padding-bottom: 5rem;
+}
+
+input {
+  height: 2.5rem;
+}
+
+input,
+textarea {
+  margin-top: 0.75rem;
+  border: 1px solid black;
+}
+
+form img,
+form label,
+form input,
+form textarea {
+  width: 100%;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
+
+.padding {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .row {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
+  width: 100%;
+}
+
+.lrg-half {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-item-spacing {
+  margin-top: 1rem;
+}
+
+.bottom-form-spacing {
+  margin-top: 1rem;
+}
+
+.save-button-cont {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem black;
+  font-size: 1.25rem;
+  background-color: rgb(10, 45, 130);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+@media only screen and (min-width: 720px) {
+  .lrg-half {
+    width: 50%;
+  }
+
+  .form-item-spacing {
+    margin-top: 0;
+  }
 }
