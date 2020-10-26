@@ -1,0 +1,9 @@
+header {
+  background-color: rgb(10, 45, 130);
+  color: white;
+}
+
+.row {
+  max-width: 1200px;
+  margin: 0 auto;
+}
