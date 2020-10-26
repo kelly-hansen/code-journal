@@ -27,7 +27,13 @@ textarea {
   border: 1px solid black;
 }
 
-form img,
+form img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 form label,
 form input,
 form textarea {
@@ -52,6 +58,10 @@ form textarea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.img-cont {
+  height: 300px;
 }
 
 .form-item-spacing {
@@ -79,6 +89,10 @@ form textarea {
 @media only screen and (min-width: 720px) {
   .lrg-half {
     width: 50%;
+  }
+
+  .img-cont {
+    height: 450px;
   }
 
   .form-item-spacing {
