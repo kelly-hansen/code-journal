@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
   <link
     rel="stylesheet"
     crossorigin="anonymous"
@@ -15,9 +16,50 @@
 </head>
 <body>
   <header>
+    <div class="row padding">
+      <h2>Code Journal</h2>
+    </div>
   </header>
   <main>
-    <div data-view="edit-profile"></div>
+    <div data-view="edit-profile">
+      <div class="row padding">
+        <h1>Edit Profile</h1>
+      </div>
+      <form action="">
+        <div class="row">
+          <div class="lrg-half padding img-cont">
+            <img src="images/placeholder-image-square.jpg" alt="avatar image preview" class="avatar-img">
+          </div>
+          <div class="lrg-half padding">
+            <div class="form-item-spacing">
+              <label for="avatarUrl">Avatar URL</label>
+              <input type="text" id="avatarUrl" required>
+            </div>
+            <div class="form-item-spacing">
+              <label for="username">Username</label>
+              <input type="text" id="username" required>
+            </div>
+            <div class="form-item-spacing">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" required>
+            </div>
+            <div class="form-item-spacing">
+              <label for="location">Location</label>
+              <input type="text" id="location" required>
+            </div>
+          </div>
+        </div>
+        <div class="row padding bottom-form-spacing">
+          <label for="bio">Bio</label>
+          <textarea name="bio" id="bio" cols="30" rows="10" required></textarea>
+        </div>
+        <div class="row padding save-button-cont bottom-form-spacing">
+          <div>
+            <input type="submit" value="SAVE" class="save-button">
+          </div>
+        </div>
+      </form>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
