@@ -34,6 +34,7 @@ $form.addEventListener('submit', submit);
 
 function createProfile(object) {
   var $contDiv = document.createElement('div');
+  $contDiv.className = 'profile-cont';
 
   var $row1 = document.createElement('div');
   $row1.className = 'row padding';
@@ -103,6 +104,12 @@ function dataViewSwap(view) {
   for (var i = 0; i < $dataViews.length; i++) {
     var $currentView = $dataViews[i].getAttribute('data-view');
     if ($currentView === view) {
+      if ($currentView === 'profile') {
+      var $profileDataView = document.querySelector('[data-view="profile"]');
+      var $profileCont = document.querySelector('.profile-cont');
+      $profileCont.remove();
+      $profileDataView.appendChild(createProfile(data));
+      }
       $dataViews[i].hidden = false;
       data.view = view;
     } else {
