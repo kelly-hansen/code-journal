@@ -24,17 +24,15 @@ function submit(event) {
   data.profile.fullName = $fullNameInput.value;
   data.profile.location = $locationInput.value;
   data.profile.bio = $bioTextarea.value;
-  for (var key in data.profile) {
-    localStorage.setItem(key, data.profile[key]);
-  }
-  $form.reset();
   dataViewSwap('profile');
+  var dataJson = JSON.stringify(data);
+  localStorage.setItem('data-obj', dataJson);
+  $form.reset();
 }
 
-if (localStorage.username) {
-  for (var key in data.profile) {
-    data.profile[key] = localStorage.getItem(key);
-  }
+var previousDataJson = localStorage.getItem('data-obj');
+if (previousDataJson !== null) {
+  data = JSON.parse(previousDataJson);
 }
 
 $form.addEventListener('submit', submit);
@@ -106,7 +104,6 @@ function createProfile(object) {
   return $contDiv;
 }
 
-var $editProfileDataView = document.querySelector('[data-view="edit-profile"]');
 var $profileDataView = document.querySelector('[data-view="profile"]');
 
 function dataViewSwap(view) {
@@ -116,23 +113,23 @@ function dataViewSwap(view) {
     if ($currentView === view) {
       if ($currentView === 'profile') {
         var $profileCont = document.querySelector('.profile-cont');
-        $profileCont.remove();
+        if ($profileCont) {
+          $profileCont.remove();
+        }
         $profileDataView.appendChild(createProfile(data));
       }
       $dataViews[i].hidden = false;
-      data.view = view;
     } else {
       $dataViews[i].hidden = true;
     }
   }
+  data.view = view;
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  if (!localStorage.username) {
-    $editProfileDataView.hidden = false;
-    $profileDataView.hidden = true;
+  if (!data.profile.username) {
+    dataViewSwap('edit-profile');
   } else {
-    $editProfileDataView.hidden = true;
-    $profileDataView.hidden = false;
+    dataViewSwap(data.view);
   }
 });
