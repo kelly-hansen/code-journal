@@ -31,6 +31,12 @@ function submit(event) {
   dataViewSwap('profile');
 }
 
+if (localStorage.username) {
+  for (var key in data.profile) {
+    data.profile[key] = localStorage.getItem(key);
+  }
+}
+
 $form.addEventListener('submit', submit);
 
 function createProfile(object) {
