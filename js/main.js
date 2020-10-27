@@ -25,8 +25,6 @@ function submit(event) {
   data.profile.location = $locationInput.value;
   data.profile.bio = $bioTextarea.value;
   dataViewSwap('profile');
-  var dataJson = JSON.stringify(data);
-  localStorage.setItem('data-obj', dataJson);
   $form.reset();
 }
 
@@ -132,4 +130,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
   } else {
     dataViewSwap(data.view);
   }
+});
+
+window.addEventListener('beforeunload', function (event) {
+  var dataJson = JSON.stringify(data);
+  localStorage.setItem('data-obj', dataJson);
 });
