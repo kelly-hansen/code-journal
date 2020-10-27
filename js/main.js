@@ -115,6 +115,13 @@ function dataViewSwap(view) {
           $profileCont.remove();
         }
         $profileDataView.appendChild(createProfile(data));
+      } else if ($currentView === 'edit-profile') {
+        $avatarImg.setAttribute('src', data.profile.avatarUrl);
+        $avatarUrlInput.value = data.profile.avatarUrl;
+        $usernameInput.value = data.profile.username;
+        $fullNameInput.value = data.profile.fullName;
+        $locationInput.value = data.profile.location;
+        $bioTextarea.value = data.profile.bio;
       }
       $dataViews[i].className = 'view';
     } else {
