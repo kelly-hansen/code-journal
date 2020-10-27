@@ -93,11 +93,23 @@ function createProfile(object) {
   $locationDiv.appendChild($locationP);
 
   var $bioDiv = document.createElement('div');
+  $bioDiv.className = 'user-detail';
   $detailsDiv.appendChild($bioDiv);
 
   var $bioP = document.createElement('p');
   $bioP.textContent = object.profile.bio;
   $bioDiv.appendChild($bioP);
+
+  var $editDiv = document.createElement('div');
+  $editDiv.className = 'user-detail';
+  $detailsDiv.appendChild($editDiv);
+
+  var $editButton = document.createElement('a');
+  $editButton.textContent = 'EDIT PROFILE';
+  $editButton.setAttribute('href', '#');
+  $editButton.setAttribute('data-view', 'edit-profile');
+  $editButton.className = 'button';
+  $editDiv.appendChild($editButton);
 
   return $contDiv;
 }
@@ -116,7 +128,9 @@ function dataViewSwap(view) {
         }
         $profileDataView.appendChild(createProfile(data));
       } else if ($currentView === 'edit-profile') {
-        $avatarImg.setAttribute('src', data.profile.avatarUrl);
+        if (data.profile.avatarUrl) {
+          $avatarImg.setAttribute('src', data.profile.avatarUrl);
+        }
         $avatarUrlInput.value = data.profile.avatarUrl;
         $usernameInput.value = data.profile.username;
         $fullNameInput.value = data.profile.fullName;

@@ -88,7 +88,7 @@ footer {
   justify-content: flex-end;
 }
 
-.save-button {
+.button {
   box-shadow: 0.1rem 0.1rem 0.1rem black;
   font-size: 1.25rem;
   background-color: rgb(10, 45, 130);
@@ -96,9 +96,10 @@ footer {
   padding: 0.5rem 2rem;
   border: none;
   border-radius: 0.25rem;
+  text-decoration: none;
 }
 
-.save-button:hover {
+.button:hover {
   cursor: pointer;
   background-color: gray;
   color: rgb(10, 45, 130);
