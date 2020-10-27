@@ -104,6 +104,7 @@ function dataViewSwap(view) {
     var $currentView = $dataViews[i].getAttribute('data-view');
     if ($currentView === view) {
       $dataViews[i].hidden = false;
+      data.view = view;
     } else {
       $dataViews[i].hidden = true;
     }
