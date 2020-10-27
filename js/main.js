@@ -28,6 +28,7 @@ function submit(event) {
     localStorage.setItem(key, data.profile[key]);
   }
   $form.reset();
+  dataViewSwap('profile');
 }
 
 $form.addEventListener('submit', submit);
@@ -105,10 +106,10 @@ function dataViewSwap(view) {
     var $currentView = $dataViews[i].getAttribute('data-view');
     if ($currentView === view) {
       if ($currentView === 'profile') {
-      var $profileDataView = document.querySelector('[data-view="profile"]');
-      var $profileCont = document.querySelector('.profile-cont');
-      $profileCont.remove();
-      $profileDataView.appendChild(createProfile(data));
+        var $profileDataView = document.querySelector('[data-view="profile"]');
+        var $profileCont = document.querySelector('.profile-cont');
+        $profileCont.remove();
+        $profileDataView.appendChild(createProfile(data));
       }
       $dataViews[i].hidden = false;
       data.view = view;
