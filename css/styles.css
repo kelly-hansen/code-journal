@@ -41,6 +41,11 @@ form textarea {
   font-size: 1rem;
 }
 
+input:focus,
+textarea:focus {
+  outline: 2px solid rgb(10, 45, 130);
+}
+
 .padding {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -80,8 +85,15 @@ form textarea {
   font-size: 1.25rem;
   background-color: rgb(10, 45, 130);
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   border: none;
+  border-radius: 0.25rem;
+}
+
+.save-button:hover {
+  cursor: pointer;
+  background-color: gray;
+  color: rgb(10, 45, 130);
 }
 
 @media only screen and (min-width: 720px) {

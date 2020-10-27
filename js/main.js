@@ -20,18 +20,14 @@ function submit(event) {
   event.preventDefault();
   $avatarImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.profile.avatarUrl = $avatarUrlInput.value;
-  $avatarUrlInput.value = '';
   data.profile.username = $usernameInput.value;
-  $usernameInput.value = '';
   data.profile.fullName = $fullNameInput.value;
-  $fullNameInput.value = '';
   data.profile.location = $locationInput.value;
-  $locationInput.value = '';
   data.profile.bio = $bioTextarea.value;
-  $bioTextarea.value = '';
   for (var key in data.profile) {
     localStorage.setItem(key, data.profile[key]);
   }
+  $form.reset();
 }
 
 $form.addEventListener('submit', submit);
