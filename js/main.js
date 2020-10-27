@@ -100,13 +100,15 @@ function createProfile(object) {
   return $contDiv;
 }
 
+var $editProfileDataView = document.querySelector('[data-view="edit-profile"]');
+var $profileDataView = document.querySelector('[data-view="profile"]');
+
 function dataViewSwap(view) {
   var $dataViews = document.querySelectorAll('.view');
   for (var i = 0; i < $dataViews.length; i++) {
     var $currentView = $dataViews[i].getAttribute('data-view');
     if ($currentView === view) {
       if ($currentView === 'profile') {
-        var $profileDataView = document.querySelector('[data-view="profile"]');
         var $profileCont = document.querySelector('.profile-cont');
         $profileCont.remove();
         $profileDataView.appendChild(createProfile(data));
@@ -118,3 +120,13 @@ function dataViewSwap(view) {
     }
   }
 }
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  if (!localStorage.username) {
+    $editProfileDataView.hidden = false;
+    $profileDataView.hidden = true;
+  } else {
+    $editProfileDataView.hidden = true;
+    $profileDataView.hidden = false;
+  }
+});
