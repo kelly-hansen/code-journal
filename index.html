@@ -21,7 +21,7 @@
     </div>
   </header>
   <main>
-    <div data-view="edit-profile">
+    <div data-view="edit-profile" class="view hidden">
       <div class="row padding">
         <h1>Edit Profile</h1>
       </div>
@@ -30,7 +30,7 @@
           <div class="lrg-half padding img-cont">
             <img src="images/placeholder-image-square.jpg" alt="avatar image preview" class="avatar-img">
           </div>
-          <div class="lrg-half padding">
+          <div class="lrg-half form-side padding">
             <div class="form-item-spacing">
               <label for="avatarUrl">Avatar URL</label>
               <input type="text" id="avatarUrl" required>
@@ -60,7 +60,10 @@
         </div>
       </form>
     </div>
+    <div data-view="profile" class="view">
+    </div>
   </main>
+  <footer></footer>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
