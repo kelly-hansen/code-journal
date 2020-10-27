@@ -97,3 +97,15 @@ function createProfile(object) {
 
   return $contDiv;
 }
+
+function dataViewSwap(view) {
+  var $dataViews = document.querySelectorAll('.view');
+  for (var i = 0; i < $dataViews.length; i++) {
+    var $currentView = $dataViews[i].getAttribute('data-view');
+    if ($currentView === view) {
+      $dataViews[i].hidden = false;
+    } else {
+      $dataViews[i].hidden = true;
+    }
+  }
+}
