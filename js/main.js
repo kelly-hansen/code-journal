@@ -116,9 +116,9 @@ function dataViewSwap(view) {
         }
         $profileDataView.appendChild(createProfile(data));
       }
-      $dataViews[i].hidden = false;
+      $dataViews[i].className = 'view';
     } else {
-      $dataViews[i].hidden = true;
+      $dataViews[i].className = 'view hidden';
     }
   }
   data.view = view;

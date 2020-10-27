@@ -115,6 +115,10 @@ footer {
   margin: 2rem 0;
 }
 
+.hidden {
+  display: none;
+}
+
 @media only screen and (min-width: 720px) {
   .lrg-half {
     width: 50%;
