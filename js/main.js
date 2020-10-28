@@ -159,10 +159,11 @@ window.addEventListener('beforeunload', function (event) {
 });
 
 document.addEventListener('click', function (event) {
-  if (event.target.tagName === 'A') {
-    var newDataView = event.target.getAttribute('data-view');
-    if (newDataView) {
-      dataViewSwap(newDataView);
-    }
+  if (event.target.tagName !== 'A') {
+    return;
+  }
+  var newDataView = event.target.getAttribute('data-view');
+  if (newDataView) {
+    dataViewSwap(newDataView);
   }
 });
