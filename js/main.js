@@ -1,5 +1,10 @@
-var $form = document.querySelector('form');
-var $avatarImg = document.querySelector('img');
+var previousDataJson = localStorage.getItem('data-obj');
+if (previousDataJson !== null) {
+  data = JSON.parse(previousDataJson);
+}
+
+var $form = document.querySelector('.edit-profile-form');
+var $avatarImg = document.querySelector('[data-view="edit-profile"] img');
 var $avatarUrlInput = document.querySelector('#avatarUrl');
 var $usernameInput = document.querySelector('#username');
 var $fullNameInput = document.querySelector('#fullName');
@@ -16,7 +21,7 @@ function updateAvatar(event) {
 
 $avatarUrlInput.addEventListener('input', updateAvatar);
 
-function submit(event) {
+function submitProfile(event) {
   event.preventDefault();
   $avatarImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.profile.avatarUrl = $avatarUrlInput.value;
@@ -28,12 +33,7 @@ function submit(event) {
   $form.reset();
 }
 
-var previousDataJson = localStorage.getItem('data-obj');
-if (previousDataJson !== null) {
-  data = JSON.parse(previousDataJson);
-}
-
-$form.addEventListener('submit', submit);
+$form.addEventListener('submit', submitProfile);
 
 function createProfile(object) {
   var $contDiv = document.createElement('div');
@@ -168,4 +168,31 @@ document.addEventListener('click', function (event) {
       dataViewSwap(newDataView);
     }
   }
+});
+
+var $createEntryForm = document.querySelector('.create-entry-form');
+var $entryImage = document.querySelector('[data-view="create-entry"] img');
+var $entryImageUrlInput = document.querySelector('#entryImageUrl');
+var $entryTitleInput = document.querySelector('#title');
+var $entryNotesTextarea = document.querySelector('#notes');
+
+function updateEntryImage(event) {
+  if (event.target.value === '') {
+    $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else {
+    $entryImage.setAttribute('src', event.target.value);
+  }
+}
+
+$entryImageUrlInput.addEventListener('input', updateEntryImage);
+
+$createEntryForm.addEventListener('submit', function (event) {
+  var newEntry = {};
+  newEntry.imageUrl = $entryImageUrlInput.value;
+  newEntry.title = $entryTitleInput.value;
+  newEntry.notes = $entryNotesTextarea.value;
+  data.entries.push(newEntry);
+  $avatarImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $createEntryForm.reset();
+  dataViewSwap('entries');
 });

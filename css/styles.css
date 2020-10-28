@@ -98,6 +98,7 @@ footer {
 .save-button-cont {
   display: flex;
   justify-content: flex-end;
+  margin-top: 1rem;
 }
 
 .button {
@@ -128,6 +129,12 @@ footer {
   margin: 2rem 0;
 }
 
+.entries-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .hidden {
   display: none;
 }
@@ -141,7 +148,7 @@ footer {
     height: 450px;
   }
 
-  .form-item-spacing {
+  [data-view="edit-profile"].form-item-spacing {
     margin-top: 0;
   }
 }

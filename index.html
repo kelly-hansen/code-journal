@@ -19,6 +19,7 @@
     <div class="row padding">
       <h2>Code Journal</h2>
       <a href="#" data-view="profile">Profile</a>
+      <a href="#" data-view="entries">Entries</a>
     </div>
   </header>
   <main>
@@ -26,7 +27,7 @@
       <div class="row padding">
         <h1>Edit Profile</h1>
       </div>
-      <form action="">
+      <form action="" class="edit-profile-form">
         <div class="row">
           <div class="lrg-half padding img-cont">
             <img src="images/placeholder-image-square.jpg" alt="avatar image preview" class="avatar-img">
@@ -61,7 +62,45 @@
         </div>
       </form>
     </div>
-    <div data-view="profile" class="view">
+    <div data-view="profile" class="view"></div>
+    <div data-view="entries" class="view">
+      <div class="row padding entries-top-row">
+        <h1>Entries</h1>
+        <div>
+          <a href="#" data-view="create-entry" class="button">NEW</a>
+        </div>
+      </div>
+    </div>
+    <div data-view="create-entry" class="view">
+      <div class="row padding">
+        <h1>New Entry</h1>
+      </div>
+      <form action="" class="create-entry-form">
+        <div class="row">
+          <div class="lrg-half padding img-cont">
+            <img src="images/placeholder-image-square.jpg" alt="entry image preview" class="avatar-img">
+          </div>
+          <div class="lrg-half padding">
+            <div class="form-item-spacing">
+              <label for="entryImageUrl">Image URL</label>
+              <input type="text" id="entryImageUrl" required>
+            </div>
+            <div class="form-item-spacing">
+              <label for="title">Title</label>
+              <input type="text" id="title" required>
+            </div>
+          </div>
+        </div>
+        <div class="row padding bottom-form-spacing">
+          <label for="notes">Notes</label>
+          <textarea name="notes" id="notes" cols="30" rows="10" required></textarea>
+        </div>
+        <div class="row padding save-button-cont bottom-form-spacing">
+          <div>
+            <input type="submit" value="SAVE" class="button">
+          </div>
+        </div>
+      </form>
     </div>
   </main>
   <footer></footer>
