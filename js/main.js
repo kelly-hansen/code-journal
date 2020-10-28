@@ -162,8 +162,10 @@ document.addEventListener('click', function (event) {
   if (event.target.tagName !== 'A') {
     return;
   }
-  var newDataView = event.target.getAttribute('data-view');
-  if (newDataView) {
-    dataViewSwap(newDataView);
+  if (data.profile.username) {
+    var newDataView = event.target.getAttribute('data-view');
+    if (newDataView) {
+      dataViewSwap(newDataView);
+    }
   }
 });
