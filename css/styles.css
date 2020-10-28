@@ -7,6 +7,18 @@ h2 {
   font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
 
+header a {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: lightgray;
+}
+
 header {
   background-color: rgb(10, 45, 130);
   color: white;

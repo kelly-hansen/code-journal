@@ -114,7 +114,7 @@ function createProfile(object) {
   return $contDiv;
 }
 
-var $profileDataView = document.querySelector('[data-view="profile"]');
+var $profileDataView = document.querySelector('div[data-view="profile"]');
 
 function dataViewSwap(view) {
   var $dataViews = document.querySelectorAll('.view');
