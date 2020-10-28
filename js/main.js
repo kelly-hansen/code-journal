@@ -1,5 +1,5 @@
-var $form = document.querySelector('form');
-var $avatarImg = document.querySelector('img');
+var $form = document.querySelector('.edit-profile-form');
+var $avatarImg = document.querySelector('.avatar-img');
 var $avatarUrlInput = document.querySelector('#avatarUrl');
 var $usernameInput = document.querySelector('#username');
 var $fullNameInput = document.querySelector('#fullName');
