@@ -157,3 +157,12 @@ window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
   localStorage.setItem('data-obj', dataJson);
 });
+
+document.addEventListener('click', function (event) {
+  if (event.target.tagName === 'A') {
+    var newDataView = event.target.getAttribute('data-view');
+    if (newDataView) {
+      dataViewSwap(newDataView);
+    }
+  }
+});
