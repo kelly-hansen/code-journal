@@ -162,8 +162,8 @@ document.addEventListener('click', function (event) {
   if (event.target.tagName !== 'A') {
     return;
   }
+  var newDataView = event.target.getAttribute('data-view');
   if (data.profile.username) {
-    var newDataView = event.target.getAttribute('data-view');
     if (newDataView) {
       dataViewSwap(newDataView);
     }
@@ -184,6 +184,8 @@ function updateEntryImage(event) {
   }
 }
 
+var entryId = 100;
+
 $entryImageUrlInput.addEventListener('input', updateEntryImage);
 
 $createEntryForm.addEventListener('submit', function (event) {
@@ -191,6 +193,7 @@ $createEntryForm.addEventListener('submit', function (event) {
   newEntry.imageUrl = $entryImageUrlInput.value;
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
+  newEntry.id = 'entry' + entryId;
   data.entries.push(newEntry);
   $entriesUl.prepend(renderNewEntry(newEntry));
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -201,6 +204,8 @@ $createEntryForm.addEventListener('submit', function (event) {
 function renderNewEntry(entryObj) {
   var $entryLi = document.createElement('li');
   $entryLi.className = 'row';
+  $entryLi.id = 'entry' + entryId;
+  entryId++;
 
   var $entryImageDiv = document.createElement('div');
   $entryImageDiv.className = 'lrg-half padding img-cont';
