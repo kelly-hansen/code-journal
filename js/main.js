@@ -234,6 +234,21 @@ function renderNewEntry(entryObj) {
   return $entryLi;
 }
 
+var $entryDeleteButton = document.querySelector('#delete');
+var $deleteModalCont = document.querySelector('.delete-modal-cont');
+
+$entryDeleteButton.addEventListener('click', function (event) {
+  $deleteModalCont.className = 'delete-modal-cont';
+});
+
+var $deleteModal = document.querySelector('.delete-modal');
+
+$deleteModal.addEventListener('click', function (event) {
+  if (event.target.tagName === 'BUTTON') {
+    $deleteModalCont.className = 'delete-modal-cont hidden';
+  }
+});
+
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
   localStorage.setItem('data-obj', dataJson);
