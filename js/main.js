@@ -145,11 +145,16 @@ function dataViewSwap(view) {
   data.view = view;
 }
 
+var $entriesUl = document.querySelector('[data-view="entries"] ul');
+
 document.addEventListener('DOMContentLoaded', function (event) {
   if (!data.profile.username) {
     dataViewSwap('edit-profile');
   } else {
     dataViewSwap(data.view);
+    for (var x = data.entries.length - 1; x >= 0; x--) {
+      $entriesUl.appendChild(renderNewEntry(data.entries[x]));
+    }
   }
 });
 
@@ -192,7 +197,37 @@ $createEntryForm.addEventListener('submit', function (event) {
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
   data.entries.push(newEntry);
-  $avatarImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $entriesUl.prepend(renderNewEntry(newEntry));
+  $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   $createEntryForm.reset();
   dataViewSwap('entries');
 });
+
+function renderNewEntry(entryObj) {
+  var $entryLi = document.createElement('li');
+  $entryLi.className = 'row';
+
+  var $entryImageDiv = document.createElement('div');
+  $entryImageDiv.className = 'lrg-half padding img-cont';
+  $entryLi.appendChild($entryImageDiv);
+
+  var $entryImageEl = document.createElement('img');
+  $entryImageEl.setAttribute('src', entryObj.imageUrl);
+  $entryImageEl.setAttribute('alt', 'entry image');
+  $entryImageEl.className = 'avatar-img';
+  $entryImageDiv.appendChild($entryImageEl);
+
+  var $entryDetailsDiv = document.createElement('div');
+  $entryDetailsDiv.className = 'lrg-half padding';
+  $entryLi.appendChild($entryDetailsDiv);
+
+  var $entryTitle = document.createElement('h2');
+  $entryTitle.textContent = entryObj.title;
+  $entryDetailsDiv.appendChild($entryTitle);
+
+  var $entryNotes = document.createElement('p');
+  $entryNotes.textContent = entryObj.notes;
+  $entryDetailsDiv.appendChild($entryNotes);
+
+  return $entryLi;
+}
