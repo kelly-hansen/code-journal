@@ -229,5 +229,12 @@ function renderNewEntry(entryObj) {
   $entryNotes.textContent = entryObj.notes;
   $entryDetailsDiv.appendChild($entryNotes);
 
+  var $entryEditButton = document.createElement('a');
+  $entryEditButton.textContent = 'EDIT/DELETE';
+  $entryEditButton.className = 'button entry-edit-button';
+  $entryEditButton.setAttribute('data-view', 'edit-entry');
+  $entryEditButton.setAttribute('href', '#');
+  $entryDetailsDiv.appendChild($entryEditButton);
+
   return $entryLi;
 }
