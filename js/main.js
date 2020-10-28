@@ -158,11 +158,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 });
 
-window.addEventListener('beforeunload', function (event) {
-  var dataJson = JSON.stringify(data);
-  localStorage.setItem('data-obj', dataJson);
-});
-
 document.addEventListener('click', function (event) {
   if (event.target.tagName !== 'A') {
     return;
@@ -238,3 +233,8 @@ function renderNewEntry(entryObj) {
 
   return $entryLi;
 }
+
+window.addEventListener('beforeunload', function (event) {
+  var dataJson = JSON.stringify(data);
+  localStorage.setItem('data-obj', dataJson);
+});

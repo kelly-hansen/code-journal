@@ -106,7 +106,47 @@
       </form>
     </div>
     <div data-view="edit-entry" class="view">
-
+      <div class="row padding">
+        <h1>Edit Entry</h1>
+      </div>
+      <form action="" class="create-entry-form">
+        <div class="row">
+          <div class="lrg-half padding img-cont">
+            <img src="images/placeholder-image-square.jpg" alt="entry image preview" class="avatar-img">
+          </div>
+          <div class="lrg-half padding">
+            <div class="form-item-spacing">
+              <label for="entryImageUrlEdit">Image URL</label>
+              <input type="text" id="entryImageUrlEdit" required>
+            </div>
+            <div class="form-item-spacing">
+              <label for="titleEdit">Title</label>
+              <input type="text" id="titleEdit" required>
+            </div>
+          </div>
+        </div>
+        <div class="row padding bottom-form-spacing">
+          <label for="notesEdit">Notes</label>
+          <textarea name="notesEdit" id="notesEdit" cols="30" rows="10" required></textarea>
+        </div>
+        <div class="row padding save-button-cont bottom-form-spacing">
+          <div>
+            <input type="submit" value="SAVE CHANGES" class="button">
+          </div>
+        </div>
+      </form>
+      <div class="row padding save-button-cont bottom-form-spacing">
+        <div>
+          <button class="button" id="delete">DELETE ENTRY</button>
+        </div>
+      </div>
+      <div class="delete-modal-cont hidden">
+        <div class="delete-modal">
+          <p>Are you sure you want to delete this entry?</p>
+          <button class="button">DELETE</button>
+          <button class="button">CANCEL</button>
+        </div>
+      </div>
     </div>
   </main>
   <footer></footer>
