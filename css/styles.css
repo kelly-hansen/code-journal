@@ -7,6 +7,18 @@ h2 {
   font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
 
+header a {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: lightgray;
+}
+
 header {
   background-color: rgb(10, 45, 130);
   color: white;
@@ -88,7 +100,7 @@ footer {
   justify-content: flex-end;
 }
 
-.save-button {
+.button {
   box-shadow: 0.1rem 0.1rem 0.1rem black;
   font-size: 1.25rem;
   background-color: rgb(10, 45, 130);
@@ -96,9 +108,10 @@ footer {
   padding: 0.5rem 2rem;
   border: none;
   border-radius: 0.25rem;
+  text-decoration: none;
 }
 
-.save-button:hover {
+.button:hover {
   cursor: pointer;
   background-color: gray;
   color: rgb(10, 45, 130);

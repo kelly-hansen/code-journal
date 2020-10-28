@@ -93,16 +93,28 @@ function createProfile(object) {
   $locationDiv.appendChild($locationP);
 
   var $bioDiv = document.createElement('div');
+  $bioDiv.className = 'user-detail';
   $detailsDiv.appendChild($bioDiv);
 
   var $bioP = document.createElement('p');
   $bioP.textContent = object.profile.bio;
   $bioDiv.appendChild($bioP);
 
+  var $editDiv = document.createElement('div');
+  $editDiv.className = 'user-detail';
+  $detailsDiv.appendChild($editDiv);
+
+  var $editButton = document.createElement('a');
+  $editButton.textContent = 'EDIT PROFILE';
+  $editButton.setAttribute('href', '#');
+  $editButton.setAttribute('data-view', 'edit-profile');
+  $editButton.className = 'button';
+  $editDiv.appendChild($editButton);
+
   return $contDiv;
 }
 
-var $profileDataView = document.querySelector('[data-view="profile"]');
+var $profileDataView = document.querySelector('div[data-view="profile"]');
 
 function dataViewSwap(view) {
   var $dataViews = document.querySelectorAll('.view');
@@ -115,6 +127,15 @@ function dataViewSwap(view) {
           $profileCont.remove();
         }
         $profileDataView.appendChild(createProfile(data));
+      } else if ($currentView === 'edit-profile') {
+        if (data.profile.avatarUrl) {
+          $avatarImg.setAttribute('src', data.profile.avatarUrl);
+        }
+        $avatarUrlInput.value = data.profile.avatarUrl;
+        $usernameInput.value = data.profile.username;
+        $fullNameInput.value = data.profile.fullName;
+        $locationInput.value = data.profile.location;
+        $bioTextarea.value = data.profile.bio;
       }
       $dataViews[i].className = 'view';
     } else {
@@ -135,4 +156,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
   localStorage.setItem('data-obj', dataJson);
+});
+
+document.addEventListener('click', function (event) {
+  if (event.target.tagName !== 'A') {
+    return;
+  }
+  if (data.profile.username) {
+    var newDataView = event.target.getAttribute('data-view');
+    if (newDataView) {
+      dataViewSwap(newDataView);
+    }
+  }
 });
