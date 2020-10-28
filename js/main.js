@@ -193,7 +193,7 @@ $createEntryForm.addEventListener('submit', function (event) {
   newEntry.imageUrl = $entryImageUrlInput.value;
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
-  newEntry.id = 'entry' + entryId;
+  newEntry.entryId = entryId;
   data.entries.push(newEntry);
   $entriesUl.prepend(renderNewEntry(newEntry));
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -204,8 +204,7 @@ $createEntryForm.addEventListener('submit', function (event) {
 function renderNewEntry(entryObj) {
   var $entryLi = document.createElement('li');
   $entryLi.className = 'row';
-  $entryLi.id = 'entry' + entryId;
-  entryId++;
+  $entryLi.setAttribute('entryId', entryId);
 
   var $entryImageDiv = document.createElement('div');
   $entryImageDiv.className = 'lrg-half padding img-cont';
@@ -234,7 +233,10 @@ function renderNewEntry(entryObj) {
   $entryEditButton.className = 'button entry-edit-button';
   $entryEditButton.setAttribute('data-view', 'edit-entry');
   $entryEditButton.setAttribute('href', '#');
+  $entryEditButton.setAttribute('entryId', entryId);
   $entryDetailsDiv.appendChild($entryEditButton);
+
+  entryId++;
 
   return $entryLi;
 }
