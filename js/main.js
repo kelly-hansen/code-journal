@@ -145,11 +145,16 @@ function dataViewSwap(view) {
   data.view = view;
 }
 
+var $entriesUl = document.querySelector('[data-view="entries"] ul');
+
 document.addEventListener('DOMContentLoaded', function (event) {
   if (!data.profile.username) {
     dataViewSwap('edit-profile');
   } else {
     dataViewSwap(data.view);
+    for (var x = data.entries.length - 1; x >= 0; x--) {
+      $entriesUl.appendChild(renderNewEntry(data.entries[x]));
+    }
   }
 });
 
@@ -192,6 +197,7 @@ $createEntryForm.addEventListener('submit', function (event) {
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
   data.entries.push(newEntry);
+  $entriesUl.prepend(renderNewEntry(newEntry));
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   $createEntryForm.reset();
   dataViewSwap('entries');
