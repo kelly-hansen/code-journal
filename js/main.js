@@ -167,6 +167,9 @@ document.addEventListener('click', function (event) {
     if (newDataView) {
       dataViewSwap(newDataView);
     }
+    if (newDataView === 'edit-entry') {
+      editEntryFormPreset(event.target.getAttribute('entryId'));
+    }
   }
 });
 
@@ -193,7 +196,7 @@ $createEntryForm.addEventListener('submit', function (event) {
   newEntry.imageUrl = $entryImageUrlInput.value;
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
-  newEntry.entryId = entryId;
+  newEntry.entryId = '' + entryId;
   data.entries.push(newEntry);
   $entriesUl.prepend(renderNewEntry(newEntry));
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -239,6 +242,24 @@ function renderNewEntry(entryObj) {
   entryId++;
 
   return $entryLi;
+}
+
+function editEntryFormPreset(entryId) {
+  var currentEntry;
+  for (var z = 0; z < data.entries.length; z++) {
+    if (data.entries[z].entryId === entryId) {
+      currentEntry = data.entries[z];
+      break;
+    }
+  }
+  var $editEntryImage = document.querySelector('[data-view="edit-entry"] img');
+  $editEntryImage.setAttribute('src', currentEntry.imageUrl);
+  var $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
+  $entryImageUrlEditInput.value = currentEntry.imageUrl;
+  var $titleEditInput = document.querySelector('#titleEdit');
+  $titleEditInput.value = currentEntry.title;
+  var $notesEditInput = document.querySelector('#notesEdit');
+  $notesEditInput.value = currentEntry.notes;
 }
 
 var $entryDeleteButton = document.querySelector('#delete');
