@@ -1,5 +1,5 @@
 var $form = document.querySelector('.edit-profile-form');
-var $avatarImg = document.querySelector('.avatar-img');
+var $avatarImg = document.querySelector('[data-view="edit-profile"] img');
 var $avatarUrlInput = document.querySelector('#avatarUrl');
 var $usernameInput = document.querySelector('#username');
 var $fullNameInput = document.querySelector('#fullName');
@@ -16,7 +16,7 @@ function updateAvatar(event) {
 
 $avatarUrlInput.addEventListener('input', updateAvatar);
 
-function submit(event) {
+function submitProfile(event) {
   event.preventDefault();
   $avatarImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.profile.avatarUrl = $avatarUrlInput.value;
@@ -33,7 +33,7 @@ if (previousDataJson !== null) {
   data = JSON.parse(previousDataJson);
 }
 
-$form.addEventListener('submit', submit);
+$form.addEventListener('submit', submitProfile);
 
 function createProfile(object) {
   var $contDiv = document.createElement('div');
@@ -169,3 +169,16 @@ document.addEventListener('click', function (event) {
     }
   }
 });
+
+var $entryImage = document.querySelector('[data-view="create-entry"] img');
+var $entryImageUrlInput = document.querySelector('#entryImageUrl');
+
+function updateEntryImage(event) {
+  if (event.target.value === '') {
+    $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else {
+    $entryImage.setAttribute('src', event.target.value);
+  }
+}
+
+$entryImageUrlInput.addEventListener('input', updateEntryImage);
