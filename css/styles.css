@@ -129,6 +129,12 @@ footer {
   margin: 2rem 0;
 }
 
+.entries-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .hidden {
   display: none;
 }
