@@ -190,6 +190,7 @@ footer {
 
 .search-form input {
   margin-right: 1rem;
+  width: 15rem;
 }
 
 .hidden {

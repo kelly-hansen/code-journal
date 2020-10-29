@@ -10,6 +10,7 @@ var data = {
     bio: ''
   },
   entries: [],
+  searchMatchEntries: [],
   currentEntry: {},
   currentEntryIndex: null
 };

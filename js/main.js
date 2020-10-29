@@ -299,6 +299,26 @@ $deleteModal.addEventListener('click', function (event) {
   }
 });
 
+var $searchForm = document.querySelector('.search-form');
+var $searchX = document.querySelector('.search-form i');
+
+function searchEntries() {
+  var $searchQuery = document.querySelector('#search-field').value.toLowerCase();
+  if ($searchQuery === '') {
+    return;
+  }
+  data.searchMatchEntries = [];
+  for (var s = 0; s < data.entries.length; s++) {
+    if (data.entries[s].title.toLowerCase().includes($searchQuery) || data.entries[s].notes.toLowerCase().includes($searchQuery)) {
+      data.searchMatchEntries.push(data.entries[s]);
+    }
+  }
+  dataViewSwap('entries');
+  $searchX.className = 'fas fa-times';
+}
+
+$searchForm.addEventListener('submit', searchEntries);
+
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
   localStorage.setItem('data-obj', dataJson);
