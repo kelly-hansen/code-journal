@@ -285,6 +285,7 @@ $editEntryForm.addEventListener('submit', function (event) {
   data.currentEntry.title = $titleEditInput.value;
   data.currentEntry.notes = $notesEditInput.value;
   clearSearch();
+  dataViewSwap('entries');
 });
 
 var $entryDeleteButton = document.querySelector('#delete');
@@ -303,6 +304,7 @@ $deleteModal.addEventListener('click', function (event) {
   if (event.target.textContent === 'DELETE') {
     data.entries.splice(data.currentEntryIndex, 1);
     clearSearch();
+    dataViewSwap('entries');
   }
 });
 
@@ -330,10 +332,12 @@ function clearSearch() {
   data.searchMatchEntries = [];
   data.searchQuery = '';
   $searchForm.reset();
-  dataViewSwap('entries');
 }
 
-$searchX.addEventListener('click', clearSearch);
+$searchX.addEventListener('click', function (event) {
+  clearSearch();
+  dataViewSwap('entries');
+});
 
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
