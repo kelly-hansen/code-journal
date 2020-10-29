@@ -138,8 +138,15 @@ function dataViewSwap(view) {
         $bioTextarea.value = data.profile.bio;
       } else if ($currentView === 'entries') {
         $entriesUl.textContent = '';
-        for (var x = data.entries.length - 1; x >= 0; x--) {
-          $entriesUl.appendChild(renderNewEntry(data.entries[x]));
+        $searchField.value = data.searchQuery;
+        var arraySelection;
+        if (!data.searchQuery) {
+          arraySelection = data.entries;
+        } else {
+          arraySelection = data.searchMatchEntries;
+        }
+        for (var x = arraySelection.length - 1; x >= 0; x--) {
+          $entriesUl.appendChild(renderNewEntry(arraySelection[x]));
         }
       }
       $dataViews[i].className = 'view';
@@ -277,6 +284,7 @@ $editEntryForm.addEventListener('submit', function (event) {
   data.currentEntry.imageUrl = $entryImageUrlEditInput.value;
   data.currentEntry.title = $titleEditInput.value;
   data.currentEntry.notes = $notesEditInput.value;
+  clearSearch();
   dataViewSwap('entries');
 });
 
@@ -295,8 +303,40 @@ $deleteModal.addEventListener('click', function (event) {
   }
   if (event.target.textContent === 'DELETE') {
     data.entries.splice(data.currentEntryIndex, 1);
+    clearSearch();
     dataViewSwap('entries');
   }
+});
+
+var $searchForm = document.querySelector('.search-form');
+var $searchX = document.querySelector('.search-form i');
+var $searchField = document.querySelector('#search-field');
+
+function searchEntries() {
+  if ($searchField.value === '') {
+    return;
+  }
+  data.searchMatchEntries = [];
+  for (var s = 0; s < data.entries.length; s++) {
+    if (data.entries[s].title.toLowerCase().includes($searchField.value.toLowerCase()) || data.entries[s].notes.toLowerCase().includes($searchField.value.toLowerCase())) {
+      data.searchMatchEntries.push(data.entries[s]);
+    }
+  }
+  data.searchQuery = $searchField.value;
+  dataViewSwap('entries');
+}
+
+$searchForm.addEventListener('submit', searchEntries);
+
+function clearSearch() {
+  data.searchMatchEntries = [];
+  data.searchQuery = '';
+  $searchForm.reset();
+}
+
+$searchX.addEventListener('click', function (event) {
+  clearSearch();
+  dataViewSwap('entries');
 });
 
 window.addEventListener('beforeunload', function (event) {

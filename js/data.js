@@ -9,5 +9,9 @@ var data = {
     avatarUrl: '',
     bio: ''
   },
-  entries: []
+  entries: [],
+  searchQuery: '',
+  searchMatchEntries: [],
+  currentEntry: {},
+  currentEntryIndex: null
 };
