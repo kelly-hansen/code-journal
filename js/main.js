@@ -138,6 +138,7 @@ function dataViewSwap(view) {
         $bioTextarea.value = data.profile.bio;
       } else if ($currentView === 'entries') {
         $entriesUl.textContent = '';
+        $searchField.value = data.searchQuery;
         var arraySelection;
         if (!data.searchQuery) {
           arraySelection = data.entries;
@@ -283,7 +284,7 @@ $editEntryForm.addEventListener('submit', function (event) {
   data.currentEntry.imageUrl = $entryImageUrlEditInput.value;
   data.currentEntry.title = $titleEditInput.value;
   data.currentEntry.notes = $notesEditInput.value;
-  dataViewSwap('entries');
+  clearSearch();
 });
 
 var $entryDeleteButton = document.querySelector('#delete');
@@ -301,7 +302,7 @@ $deleteModal.addEventListener('click', function (event) {
   }
   if (event.target.textContent === 'DELETE') {
     data.entries.splice(data.currentEntryIndex, 1);
-    dataViewSwap('entries');
+    clearSearch();
   }
 });
 
@@ -321,10 +322,18 @@ function searchEntries() {
   }
   data.searchQuery = $searchField.value;
   dataViewSwap('entries');
-  $searchX.className = 'fas fa-times';
 }
 
 $searchForm.addEventListener('submit', searchEntries);
+
+function clearSearch() {
+  data.searchMatchEntries = [];
+  data.searchQuery = '';
+  $searchForm.reset();
+  dataViewSwap('entries');
+}
+
+$searchX.addEventListener('click', clearSearch);
 
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
