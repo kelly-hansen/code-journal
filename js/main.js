@@ -136,6 +136,11 @@ function dataViewSwap(view) {
         $fullNameInput.value = data.profile.fullName;
         $locationInput.value = data.profile.location;
         $bioTextarea.value = data.profile.bio;
+      } else if ($currentView === 'entries') {
+        $entriesUl.textContent = '';
+        for (var x = data.entries.length - 1; x >= 0; x--) {
+          $entriesUl.appendChild(renderNewEntry(data.entries[x]));
+        }
       }
       $dataViews[i].className = 'view';
     } else {
@@ -152,9 +157,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     dataViewSwap('edit-profile');
   } else {
     dataViewSwap(data.view);
-    for (var x = data.entries.length - 1; x >= 0; x--) {
-      $entriesUl.appendChild(renderNewEntry(data.entries[x]));
-    }
   }
 });
 
@@ -187,17 +189,25 @@ function updateEntryImage(event) {
   }
 }
 
-var entryId = 100;
-
 $entryImageUrlInput.addEventListener('input', updateEntryImage);
+
+function determineEntryId() {
+  var newEntryId = 100;
+  for (var q = 0; q < data.entries.length; q++) {
+    if (data.entries[q].entryId > newEntryId) {
+      newEntryId = data.entries[q].entryId;
+    }
+  }
+  newEntryId++;
+  return newEntryId;
+}
 
 $createEntryForm.addEventListener('submit', function (event) {
   var newEntry = {};
   newEntry.imageUrl = $entryImageUrlInput.value;
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
-  newEntry.entryId = '' + entryId;
-  entryId++;
+  newEntry.entryId = determineEntryId();
   data.entries.push(newEntry);
   $entriesUl.prepend(renderNewEntry(newEntry));
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -253,7 +263,7 @@ var currentEntryIndex;
 
 function editEntryFormPreset(entryId) {
   for (var z = 0; z < data.entries.length; z++) {
-    if (data.entries[z].entryId === entryId) {
+    if (data.entries[z].entryId.toString() === entryId) {
       currentEntry = data.entries[z];
       currentEntryIndex = z;
       break;
