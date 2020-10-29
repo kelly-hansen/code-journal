@@ -138,8 +138,14 @@ function dataViewSwap(view) {
         $bioTextarea.value = data.profile.bio;
       } else if ($currentView === 'entries') {
         $entriesUl.textContent = '';
-        for (var x = data.entries.length - 1; x >= 0; x--) {
-          $entriesUl.appendChild(renderNewEntry(data.entries[x]));
+        var arraySelection;
+        if (!data.searchQuery) {
+          arraySelection = data.entries;
+        } else {
+          arraySelection = data.searchMatchEntries;
+        }
+        for (var x = arraySelection.length - 1; x >= 0; x--) {
+          $entriesUl.appendChild(renderNewEntry(arraySelection[x]));
         }
       }
       $dataViews[i].className = 'view';
@@ -301,18 +307,19 @@ $deleteModal.addEventListener('click', function (event) {
 
 var $searchForm = document.querySelector('.search-form');
 var $searchX = document.querySelector('.search-form i');
+var $searchField = document.querySelector('#search-field');
 
 function searchEntries() {
-  var $searchQuery = document.querySelector('#search-field').value.toLowerCase();
-  if ($searchQuery === '') {
+  if ($searchField.value === '') {
     return;
   }
   data.searchMatchEntries = [];
   for (var s = 0; s < data.entries.length; s++) {
-    if (data.entries[s].title.toLowerCase().includes($searchQuery) || data.entries[s].notes.toLowerCase().includes($searchQuery)) {
+    if (data.entries[s].title.toLowerCase().includes($searchField.value.toLowerCase()) || data.entries[s].notes.toLowerCase().includes($searchField.value.toLowerCase())) {
       data.searchMatchEntries.push(data.entries[s]);
     }
   }
+  data.searchQuery = $searchField.value;
   dataViewSwap('entries');
   $searchX.className = 'fas fa-times';
 }
