@@ -9,5 +9,7 @@ var data = {
     avatarUrl: '',
     bio: ''
   },
-  entries: []
+  entries: [],
+  currentEntry: {},
+  currentEntryIndex: null
 };
