@@ -249,11 +249,13 @@ var $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
 var $titleEditInput = document.querySelector('#titleEdit');
 var $notesEditInput = document.querySelector('#notesEdit');
 var currentEntry;
+var currentEntryIndex;
 
 function editEntryFormPreset(entryId) {
   for (var z = 0; z < data.entries.length; z++) {
     if (data.entries[z].entryId === entryId) {
       currentEntry = data.entries[z];
+      currentEntryIndex = z;
       break;
     }
   }
@@ -282,6 +284,10 @@ var $deleteModal = document.querySelector('.delete-modal');
 $deleteModal.addEventListener('click', function (event) {
   if (event.target.tagName === 'BUTTON') {
     $deleteModalCont.className = 'delete-modal-cont hidden';
+  }
+  if (event.target.textContent === 'DELETE') {
+    data.entries.splice(currentEntryIndex, 1);
+    dataViewSwap('entries');
   }
 });
 
