@@ -168,7 +168,7 @@ document.addEventListener('click', function (event) {
       dataViewSwap(newDataView);
     }
     if (newDataView === 'edit-entry') {
-      editEntryFormPreset(event.target.getAttribute('entryId'));
+      editEntryFormPreset(event.target.getAttribute('entry-id'));
     }
   }
 });
@@ -197,6 +197,7 @@ $createEntryForm.addEventListener('submit', function (event) {
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
   newEntry.entryId = '' + entryId;
+  entryId++;
   data.entries.push(newEntry);
   $entriesUl.prepend(renderNewEntry(newEntry));
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -207,7 +208,7 @@ $createEntryForm.addEventListener('submit', function (event) {
 function renderNewEntry(entryObj) {
   var $entryLi = document.createElement('li');
   $entryLi.className = 'row';
-  $entryLi.setAttribute('entryId', entryId);
+  $entryLi.setAttribute('entry-id', entryObj.entryId);
 
   var $entryImageDiv = document.createElement('div');
   $entryImageDiv.className = 'lrg-half padding img-cont';
@@ -236,31 +237,38 @@ function renderNewEntry(entryObj) {
   $entryEditButton.className = 'button entry-edit-button';
   $entryEditButton.setAttribute('data-view', 'edit-entry');
   $entryEditButton.setAttribute('href', '#');
-  $entryEditButton.setAttribute('entryId', entryId);
+  $entryEditButton.setAttribute('entry-id', entryObj.entryId);
   $entryDetailsDiv.appendChild($entryEditButton);
-
-  entryId++;
 
   return $entryLi;
 }
 
+var $editEntryForm = document.querySelector('.edit-entry-form');
+var $editEntryImage = document.querySelector('[data-view="edit-entry"] img');
+var $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
+var $titleEditInput = document.querySelector('#titleEdit');
+var $notesEditInput = document.querySelector('#notesEdit');
+var currentEntry;
+
 function editEntryFormPreset(entryId) {
-  var currentEntry;
   for (var z = 0; z < data.entries.length; z++) {
     if (data.entries[z].entryId === entryId) {
       currentEntry = data.entries[z];
       break;
     }
   }
-  var $editEntryImage = document.querySelector('[data-view="edit-entry"] img');
   $editEntryImage.setAttribute('src', currentEntry.imageUrl);
-  var $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
   $entryImageUrlEditInput.value = currentEntry.imageUrl;
-  var $titleEditInput = document.querySelector('#titleEdit');
   $titleEditInput.value = currentEntry.title;
-  var $notesEditInput = document.querySelector('#notesEdit');
   $notesEditInput.value = currentEntry.notes;
 }
+
+$editEntryForm.addEventListener('submit', function (event) {
+  currentEntry.imageUrl = $entryImageUrlEditInput.value;
+  currentEntry.title = $titleEditInput.value;
+  currentEntry.notes = $notesEditInput.value;
+  dataViewSwap('entries');
+});
 
 var $entryDeleteButton = document.querySelector('#delete');
 var $deleteModalCont = document.querySelector('.delete-modal-cont');
