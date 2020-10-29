@@ -258,27 +258,25 @@ var $editEntryImage = document.querySelector('[data-view="edit-entry"] img');
 var $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
 var $titleEditInput = document.querySelector('#titleEdit');
 var $notesEditInput = document.querySelector('#notesEdit');
-var currentEntry;
-var currentEntryIndex;
 
 function editEntryFormPreset(entryId) {
   for (var z = 0; z < data.entries.length; z++) {
     if (data.entries[z].entryId.toString() === entryId) {
-      currentEntry = data.entries[z];
-      currentEntryIndex = z;
+      data.currentEntry = data.entries[z];
+      data.currentEntryIndex = z;
       break;
     }
   }
-  $editEntryImage.setAttribute('src', currentEntry.imageUrl);
-  $entryImageUrlEditInput.value = currentEntry.imageUrl;
-  $titleEditInput.value = currentEntry.title;
-  $notesEditInput.value = currentEntry.notes;
+  $editEntryImage.setAttribute('src', data.currentEntry.imageUrl);
+  $entryImageUrlEditInput.value = data.currentEntry.imageUrl;
+  $titleEditInput.value = data.currentEntry.title;
+  $notesEditInput.value = data.currentEntry.notes;
 }
 
 $editEntryForm.addEventListener('submit', function (event) {
-  currentEntry.imageUrl = $entryImageUrlEditInput.value;
-  currentEntry.title = $titleEditInput.value;
-  currentEntry.notes = $notesEditInput.value;
+  data.currentEntry.imageUrl = $entryImageUrlEditInput.value;
+  data.currentEntry.title = $titleEditInput.value;
+  data.currentEntry.notes = $notesEditInput.value;
   dataViewSwap('entries');
 });
 
@@ -296,7 +294,7 @@ $deleteModal.addEventListener('click', function (event) {
     $deleteModalCont.className = 'delete-modal-cont hidden';
   }
   if (event.target.textContent === 'DELETE') {
-    data.entries.splice(currentEntryIndex, 1);
+    data.entries.splice(data.currentEntryIndex, 1);
     dataViewSwap('entries');
   }
 });
