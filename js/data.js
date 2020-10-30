@@ -13,5 +13,6 @@ var data = {
   searchQuery: '',
   searchMatchEntries: [],
   currentEntry: {},
-  currentEntryIndex: null
+  currentEntryIndex: null,
+  darkMode: false
 };
