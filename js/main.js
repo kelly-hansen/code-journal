@@ -3,6 +3,8 @@ if (previousDataJson !== null) {
   data = JSON.parse(previousDataJson);
 }
 
+var $body = document.querySelector('body');
+
 var $form = document.querySelector('.edit-profile-form');
 var $avatarImg = document.querySelector('[data-view="edit-profile"] img');
 var $avatarUrlInput = document.querySelector('#avatarUrl');
@@ -68,10 +70,8 @@ function createProfile(object) {
   $usernameDiv.className = 'user-detail';
   $detailsDiv.appendChild($usernameDiv);
 
-  var $userIcon = document.createElement('img');
-  $userIcon.setAttribute('src', 'images/user.svg');
-  $userIcon.setAttribute('alt', 'User icon');
-  $userIcon.className = 'icon';
+  var $userIcon = document.createElement('i');
+  $userIcon.className = 'fas fa-user icon';
   $usernameDiv.appendChild($userIcon);
 
   var $usernameP = document.createElement('p');
@@ -82,10 +82,8 @@ function createProfile(object) {
   $locationDiv.className = 'user-detail';
   $detailsDiv.appendChild($locationDiv);
 
-  var $locationIcon = document.createElement('img');
-  $locationIcon.setAttribute('src', 'images/pin.svg');
-  $locationIcon.setAttribute('alt', 'Pin icon');
-  $locationIcon.className = 'icon';
+  var $locationIcon = document.createElement('i');
+  $locationIcon.className = 'fas fa-map-marker-alt icon';
   $locationDiv.appendChild($locationIcon);
 
   var $locationP = document.createElement('p');
@@ -164,6 +162,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
     dataViewSwap('edit-profile');
   } else {
     dataViewSwap(data.view);
+  }
+  if (data.darkMode) {
+    $body.className = 'dark-mode';
   }
 });
 
@@ -251,7 +252,7 @@ function renderNewEntry(entryObj) {
 
   var $entryEditButton = document.createElement('a');
   $entryEditButton.textContent = 'EDIT/DELETE';
-  $entryEditButton.className = 'button entry-edit-button';
+  $entryEditButton.className = 'button smaller-button';
   $entryEditButton.setAttribute('data-view', 'edit-entry');
   $entryEditButton.setAttribute('href', '#');
   $entryEditButton.setAttribute('entry-id', entryObj.entryId);
@@ -338,6 +339,19 @@ $searchX.addEventListener('click', function (event) {
   clearSearch();
   dataViewSwap('entries');
 });
+
+var $darkModeButton = document.querySelector('#dark-mode-button');
+
+function toggleDarkMode() {
+  if (data.darkMode) {
+    $body.className = '';
+  } else {
+    $body.className = 'dark-mode';
+  }
+  data.darkMode = !data.darkMode;
+}
+
+$darkModeButton.addEventListener('click', toggleDarkMode);
 
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);

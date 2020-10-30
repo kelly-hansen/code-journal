@@ -70,7 +70,10 @@ i {
 
 footer {
   width: 100%;
-  height: 3rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .padding {
@@ -128,18 +131,17 @@ footer {
   background-color: rgb(10, 45, 130);
   color: white;
   padding: 0.5rem 2rem;
-  border: none;
+  border: 2px solid rgb(10, 45, 130);
   border-radius: 0.25rem;
   text-decoration: none;
 }
 
 .button:hover {
   cursor: pointer;
-  background-color: gray;
-  color: rgb(10, 45, 130);
+  border: 2px solid gray;
 }
 
-.button.entry-edit-button {
+.button.smaller-button {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
@@ -147,6 +149,7 @@ footer {
 .icon {
   height: 2.5rem;
   padding-right: 1rem;
+  color: rgb(10, 45, 130);
 }
 
 .user-detail {
@@ -175,6 +178,7 @@ footer {
 
 .delete-modal {
   background-color: white;
+  color: black;
   padding: 2rem;
   border-radius: 0.5rem;
   text-align: center;
@@ -193,6 +197,17 @@ footer {
 .search-form input {
   margin-right: 1rem;
   width: 15rem;
+}
+
+.dark-mode {
+  background-color: rgb(20, 20, 20);
+  color: white;
+}
+
+.dark-mode input:not([type="submit"]),
+.dark-mode textarea {
+  background-color: rgb(40, 40, 40);
+  color: white;
 }
 
 .hidden {
