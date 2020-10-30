@@ -252,7 +252,7 @@ function renderNewEntry(entryObj) {
 
   var $entryEditButton = document.createElement('a');
   $entryEditButton.textContent = 'EDIT/DELETE';
-  $entryEditButton.className = 'button entry-edit-button';
+  $entryEditButton.className = 'button smaller-button';
   $entryEditButton.setAttribute('data-view', 'edit-entry');
   $entryEditButton.setAttribute('href', '#');
   $entryEditButton.setAttribute('entry-id', entryObj.entryId);
