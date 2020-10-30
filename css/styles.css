@@ -150,6 +150,7 @@ footer {
   height: 2.5rem;
   padding-right: 1rem;
   color: rgb(10, 45, 130);
+  cursor: default;
 }
 
 .user-detail {
