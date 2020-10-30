@@ -3,6 +3,8 @@ if (previousDataJson !== null) {
   data = JSON.parse(previousDataJson);
 }
 
+var $body = document.querySelector('body');
+
 var $form = document.querySelector('.edit-profile-form');
 var $avatarImg = document.querySelector('[data-view="edit-profile"] img');
 var $avatarUrlInput = document.querySelector('#avatarUrl');
@@ -160,6 +162,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
     dataViewSwap('edit-profile');
   } else {
     dataViewSwap(data.view);
+  }
+  if (data.darkMode) {
+    $body.className = 'dark-mode';
   }
 });
 
@@ -334,6 +339,19 @@ $searchX.addEventListener('click', function (event) {
   clearSearch();
   dataViewSwap('entries');
 });
+
+var $darkModeButton = document.querySelector('#dark-mode-button');
+
+function toggleDarkMode() {
+  if (data.darkMode) {
+    $body.className = '';
+  } else {
+    $body.className = 'dark-mode';
+  }
+  data.darkMode = !data.darkMode;
+}
+
+$darkModeButton.addEventListener('click', toggleDarkMode);
 
 window.addEventListener('beforeunload', function (event) {
   var dataJson = JSON.stringify(data);
