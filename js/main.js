@@ -68,10 +68,8 @@ function createProfile(object) {
   $usernameDiv.className = 'user-detail';
   $detailsDiv.appendChild($usernameDiv);
 
-  var $userIcon = document.createElement('img');
-  $userIcon.setAttribute('src', 'images/user.svg');
-  $userIcon.setAttribute('alt', 'User icon');
-  $userIcon.className = 'icon';
+  var $userIcon = document.createElement('i');
+  $userIcon.className = 'fas fa-user icon';
   $usernameDiv.appendChild($userIcon);
 
   var $usernameP = document.createElement('p');
@@ -82,10 +80,8 @@ function createProfile(object) {
   $locationDiv.className = 'user-detail';
   $detailsDiv.appendChild($locationDiv);
 
-  var $locationIcon = document.createElement('img');
-  $locationIcon.setAttribute('src', 'images/pin.svg');
-  $locationIcon.setAttribute('alt', 'Pin icon');
-  $locationIcon.className = 'icon';
+  var $locationIcon = document.createElement('i');
+  $locationIcon.className = 'fas fa-map-marker-alt icon';
   $locationDiv.appendChild($locationIcon);
 
   var $locationP = document.createElement('p');
