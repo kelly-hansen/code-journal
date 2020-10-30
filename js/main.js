@@ -281,6 +281,16 @@ function editEntryFormPreset(entryId) {
   $notesEditInput.value = data.currentEntry.notes;
 }
 
+function updateEntryEditImage(event) {
+  if (event.target.value === '') {
+    $editEntryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else {
+    $editEntryImage.setAttribute('src', event.target.value);
+  }
+}
+
+$entryImageUrlEditInput.addEventListener('input', updateEntryEditImage);
+
 $editEntryForm.addEventListener('submit', function (event) {
   data.currentEntry.imageUrl = $entryImageUrlEditInput.value;
   data.currentEntry.title = $titleEditInput.value;
