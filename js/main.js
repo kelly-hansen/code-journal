@@ -157,7 +157,7 @@ function dataViewSwap(view) {
 
 const $entriesUl = document.querySelector('[data-view="entries"] ul');
 
-document.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded', event => {
   if (!data.profile.username) {
     dataViewSwap('edit-profile');
   } else {
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 });
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', event => {
   if (event.target.tagName !== 'A') {
     return;
   }
@@ -210,7 +210,7 @@ function determineEntryId() {
   return newEntryId;
 }
 
-$createEntryForm.addEventListener('submit', function (event) {
+$createEntryForm.addEventListener('submit', event => {
   const newEntry = {};
   newEntry.imageUrl = $entryImageUrlInput.value;
   newEntry.title = $entryTitleInput.value;
@@ -291,7 +291,7 @@ function updateEntryEditImage(event) {
 
 $entryImageUrlEditInput.addEventListener('input', updateEntryEditImage);
 
-$editEntryForm.addEventListener('submit', function (event) {
+$editEntryForm.addEventListener('submit', event => {
   data.currentEntry.imageUrl = $entryImageUrlEditInput.value;
   data.currentEntry.title = $titleEditInput.value;
   data.currentEntry.notes = $notesEditInput.value;
@@ -302,13 +302,13 @@ $editEntryForm.addEventListener('submit', function (event) {
 const $entryDeleteButton = document.querySelector('#delete');
 const $deleteModalCont = document.querySelector('.delete-modal-cont');
 
-$entryDeleteButton.addEventListener('click', function (event) {
+$entryDeleteButton.addEventListener('click', event => {
   $deleteModalCont.className = 'delete-modal-cont';
 });
 
 const $deleteModal = document.querySelector('.delete-modal');
 
-$deleteModal.addEventListener('click', function (event) {
+$deleteModal.addEventListener('click', event => {
   if (event.target.tagName === 'BUTTON') {
     $deleteModalCont.className = 'delete-modal-cont hidden';
   }
@@ -345,7 +345,7 @@ function clearSearch() {
   $searchForm.reset();
 }
 
-$searchX.addEventListener('click', function (event) {
+$searchX.addEventListener('click', event => {
   clearSearch();
   dataViewSwap('entries');
 });
@@ -363,7 +363,7 @@ function toggleDarkMode() {
 
 $darkModeButton.addEventListener('click', toggleDarkMode);
 
-window.addEventListener('beforeunload', function (event) {
+window.addEventListener('beforeunload', event => {
   const dataJson = JSON.stringify(data);
   localStorage.setItem('data-obj', dataJson);
 });
