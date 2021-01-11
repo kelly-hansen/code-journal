@@ -1,6 +1,6 @@
 /* exported data */
 
-var data = {
+let data = {
   view: 'edit-profile',
   profile: {
     username: '',

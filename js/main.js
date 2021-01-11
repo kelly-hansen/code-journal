@@ -1,17 +1,17 @@
-var previousDataJson = localStorage.getItem('data-obj');
+const previousDataJson = localStorage.getItem('data-obj');
 if (previousDataJson !== null) {
   data = JSON.parse(previousDataJson);
 }
 
-var $body = document.querySelector('body');
+const $body = document.querySelector('body');
 
-var $form = document.querySelector('.edit-profile-form');
-var $avatarImg = document.querySelector('[data-view="edit-profile"] img');
-var $avatarUrlInput = document.querySelector('#avatarUrl');
-var $usernameInput = document.querySelector('#username');
-var $fullNameInput = document.querySelector('#fullName');
-var $locationInput = document.querySelector('#location');
-var $bioTextarea = document.querySelector('#bio');
+const $form = document.querySelector('.edit-profile-form');
+const $avatarImg = document.querySelector('[data-view="edit-profile"] img');
+const $avatarUrlInput = document.querySelector('#avatarUrl');
+const $usernameInput = document.querySelector('#username');
+const $fullNameInput = document.querySelector('#fullName');
+const $locationInput = document.querySelector('#location');
+const $bioTextarea = document.querySelector('#bio');
 
 function updateAvatar(event) {
   if ($avatarUrlInput.value === '') {
@@ -38,71 +38,71 @@ function submitProfile(event) {
 $form.addEventListener('submit', submitProfile);
 
 function createProfile(object) {
-  var $contDiv = document.createElement('div');
+  const $contDiv = document.createElement('div');
   $contDiv.className = 'profile-cont';
 
-  var $row1 = document.createElement('div');
+  const $row1 = document.createElement('div');
   $row1.className = 'row padding';
   $contDiv.appendChild($row1);
 
-  var $h1 = document.createElement('h1');
+  const $h1 = document.createElement('h1');
   $h1.textContent = object.profile.fullName;
   $row1.appendChild($h1);
 
-  var $row2 = document.createElement('div');
+  const $row2 = document.createElement('div');
   $row2.className = 'row';
   $contDiv.appendChild($row2);
 
-  var $avatarDiv = document.createElement('div');
+  const $avatarDiv = document.createElement('div');
   $avatarDiv.className = 'lrg-half padding img-cont';
   $row2.appendChild($avatarDiv);
 
-  var $avatar = document.createElement('img');
+  const $avatar = document.createElement('img');
   $avatar.setAttribute('src', object.profile.avatarUrl);
   $avatar.className = 'avatar-img';
   $avatarDiv.appendChild($avatar);
 
-  var $detailsDiv = document.createElement('div');
+  const $detailsDiv = document.createElement('div');
   $detailsDiv.className = 'lrg-half padding';
   $row2.appendChild($detailsDiv);
 
-  var $usernameDiv = document.createElement('div');
+  const $usernameDiv = document.createElement('div');
   $usernameDiv.className = 'user-detail';
   $detailsDiv.appendChild($usernameDiv);
 
-  var $userIcon = document.createElement('i');
+  const $userIcon = document.createElement('i');
   $userIcon.className = 'fas fa-user icon';
   $usernameDiv.appendChild($userIcon);
 
-  var $usernameP = document.createElement('p');
+  const $usernameP = document.createElement('p');
   $usernameP.textContent = object.profile.username;
   $usernameDiv.appendChild($usernameP);
 
-  var $locationDiv = document.createElement('div');
+  const $locationDiv = document.createElement('div');
   $locationDiv.className = 'user-detail';
   $detailsDiv.appendChild($locationDiv);
 
-  var $locationIcon = document.createElement('i');
+  const $locationIcon = document.createElement('i');
   $locationIcon.className = 'fas fa-map-marker-alt icon';
   $locationDiv.appendChild($locationIcon);
 
-  var $locationP = document.createElement('p');
+  const $locationP = document.createElement('p');
   $locationP.textContent = object.profile.location;
   $locationDiv.appendChild($locationP);
 
-  var $bioDiv = document.createElement('div');
+  const $bioDiv = document.createElement('div');
   $bioDiv.className = 'user-detail';
   $detailsDiv.appendChild($bioDiv);
 
-  var $bioP = document.createElement('p');
+  const $bioP = document.createElement('p');
   $bioP.textContent = object.profile.bio;
   $bioDiv.appendChild($bioP);
 
-  var $editDiv = document.createElement('div');
+  const $editDiv = document.createElement('div');
   $editDiv.className = 'user-detail';
   $detailsDiv.appendChild($editDiv);
 
-  var $editButton = document.createElement('a');
+  const $editButton = document.createElement('a');
   $editButton.textContent = 'EDIT PROFILE';
   $editButton.setAttribute('href', '#');
   $editButton.setAttribute('data-view', 'edit-profile');
@@ -112,15 +112,15 @@ function createProfile(object) {
   return $contDiv;
 }
 
-var $profileDataView = document.querySelector('div[data-view="profile"]');
+const $profileDataView = document.querySelector('div[data-view="profile"]');
 
 function dataViewSwap(view) {
-  var $dataViews = document.querySelectorAll('.view');
-  for (var i = 0; i < $dataViews.length; i++) {
-    var $currentView = $dataViews[i].getAttribute('data-view');
+  const $dataViews = document.querySelectorAll('.view');
+  for (let i = 0; i < $dataViews.length; i++) {
+    const $currentView = $dataViews[i].getAttribute('data-view');
     if ($currentView === view) {
       if ($currentView === 'profile') {
-        var $profileCont = document.querySelector('.profile-cont');
+        const $profileCont = document.querySelector('.profile-cont');
         if ($profileCont) {
           $profileCont.remove();
         }
@@ -137,13 +137,13 @@ function dataViewSwap(view) {
       } else if ($currentView === 'entries') {
         $entriesUl.textContent = '';
         $searchField.value = data.searchQuery;
-        var arraySelection;
+        let arraySelection;
         if (!data.searchQuery) {
           arraySelection = data.entries;
         } else {
           arraySelection = data.searchMatchEntries;
         }
-        for (var x = arraySelection.length - 1; x >= 0; x--) {
+        for (let x = arraySelection.length - 1; x >= 0; x--) {
           $entriesUl.appendChild(renderNewEntry(arraySelection[x]));
         }
       }
@@ -155,9 +155,9 @@ function dataViewSwap(view) {
   data.view = view;
 }
 
-var $entriesUl = document.querySelector('[data-view="entries"] ul');
+const $entriesUl = document.querySelector('[data-view="entries"] ul');
 
-document.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded', event => {
   if (!data.profile.username) {
     dataViewSwap('edit-profile');
   } else {
@@ -168,11 +168,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 });
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', event => {
   if (event.target.tagName !== 'A') {
     return;
   }
-  var newDataView = event.target.getAttribute('data-view');
+  const newDataView = event.target.getAttribute('data-view');
   if (data.profile.username) {
     if (newDataView) {
       dataViewSwap(newDataView);
@@ -183,11 +183,11 @@ document.addEventListener('click', function (event) {
   }
 });
 
-var $createEntryForm = document.querySelector('.create-entry-form');
-var $entryImage = document.querySelector('[data-view="create-entry"] img');
-var $entryImageUrlInput = document.querySelector('#entryImageUrl');
-var $entryTitleInput = document.querySelector('#title');
-var $entryNotesTextarea = document.querySelector('#notes');
+const $createEntryForm = document.querySelector('.create-entry-form');
+const $entryImage = document.querySelector('[data-view="create-entry"] img');
+const $entryImageUrlInput = document.querySelector('#entryImageUrl');
+const $entryTitleInput = document.querySelector('#title');
+const $entryNotesTextarea = document.querySelector('#notes');
 
 function updateEntryImage(event) {
   if (event.target.value === '') {
@@ -200,8 +200,8 @@ function updateEntryImage(event) {
 $entryImageUrlInput.addEventListener('input', updateEntryImage);
 
 function determineEntryId() {
-  var newEntryId = 100;
-  for (var q = 0; q < data.entries.length; q++) {
+  let newEntryId = 100;
+  for (let q = 0; q < data.entries.length; q++) {
     if (data.entries[q].entryId > newEntryId) {
       newEntryId = data.entries[q].entryId;
     }
@@ -210,8 +210,8 @@ function determineEntryId() {
   return newEntryId;
 }
 
-$createEntryForm.addEventListener('submit', function (event) {
-  var newEntry = {};
+$createEntryForm.addEventListener('submit', event => {
+  const newEntry = {};
   newEntry.imageUrl = $entryImageUrlInput.value;
   newEntry.title = $entryTitleInput.value;
   newEntry.notes = $entryNotesTextarea.value;
@@ -224,33 +224,33 @@ $createEntryForm.addEventListener('submit', function (event) {
 });
 
 function renderNewEntry(entryObj) {
-  var $entryLi = document.createElement('li');
+  const $entryLi = document.createElement('li');
   $entryLi.className = 'row';
   $entryLi.setAttribute('entry-id', entryObj.entryId);
 
-  var $entryImageDiv = document.createElement('div');
+  const $entryImageDiv = document.createElement('div');
   $entryImageDiv.className = 'lrg-half padding img-cont';
   $entryLi.appendChild($entryImageDiv);
 
-  var $entryImageEl = document.createElement('img');
+  const $entryImageEl = document.createElement('img');
   $entryImageEl.setAttribute('src', entryObj.imageUrl);
   $entryImageEl.setAttribute('alt', 'entry image');
   $entryImageEl.className = 'avatar-img';
   $entryImageDiv.appendChild($entryImageEl);
 
-  var $entryDetailsDiv = document.createElement('div');
+  const $entryDetailsDiv = document.createElement('div');
   $entryDetailsDiv.className = 'lrg-half padding';
   $entryLi.appendChild($entryDetailsDiv);
 
-  var $entryTitle = document.createElement('h2');
+  const $entryTitle = document.createElement('h2');
   $entryTitle.textContent = entryObj.title;
   $entryDetailsDiv.appendChild($entryTitle);
 
-  var $entryNotes = document.createElement('p');
+  const $entryNotes = document.createElement('p');
   $entryNotes.textContent = entryObj.notes;
   $entryDetailsDiv.appendChild($entryNotes);
 
-  var $entryEditButton = document.createElement('a');
+  const $entryEditButton = document.createElement('a');
   $entryEditButton.textContent = 'EDIT/DELETE';
   $entryEditButton.className = 'button smaller-button';
   $entryEditButton.setAttribute('data-view', 'edit-entry');
@@ -261,14 +261,14 @@ function renderNewEntry(entryObj) {
   return $entryLi;
 }
 
-var $editEntryForm = document.querySelector('.edit-entry-form');
-var $editEntryImage = document.querySelector('[data-view="edit-entry"] img');
-var $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
-var $titleEditInput = document.querySelector('#titleEdit');
-var $notesEditInput = document.querySelector('#notesEdit');
+const $editEntryForm = document.querySelector('.edit-entry-form');
+const $editEntryImage = document.querySelector('[data-view="edit-entry"] img');
+const $entryImageUrlEditInput = document.querySelector('#entryImageUrlEdit');
+const $titleEditInput = document.querySelector('#titleEdit');
+const $notesEditInput = document.querySelector('#notesEdit');
 
 function editEntryFormPreset(entryId) {
-  for (var z = 0; z < data.entries.length; z++) {
+  for (let z = 0; z < data.entries.length; z++) {
     if (data.entries[z].entryId.toString() === entryId) {
       data.currentEntry = data.entries[z];
       data.currentEntryIndex = z;
@@ -291,7 +291,7 @@ function updateEntryEditImage(event) {
 
 $entryImageUrlEditInput.addEventListener('input', updateEntryEditImage);
 
-$editEntryForm.addEventListener('submit', function (event) {
+$editEntryForm.addEventListener('submit', event => {
   data.currentEntry.imageUrl = $entryImageUrlEditInput.value;
   data.currentEntry.title = $titleEditInput.value;
   data.currentEntry.notes = $notesEditInput.value;
@@ -299,16 +299,16 @@ $editEntryForm.addEventListener('submit', function (event) {
   dataViewSwap('entries');
 });
 
-var $entryDeleteButton = document.querySelector('#delete');
-var $deleteModalCont = document.querySelector('.delete-modal-cont');
+const $entryDeleteButton = document.querySelector('#delete');
+const $deleteModalCont = document.querySelector('.delete-modal-cont');
 
-$entryDeleteButton.addEventListener('click', function (event) {
+$entryDeleteButton.addEventListener('click', event => {
   $deleteModalCont.className = 'delete-modal-cont';
 });
 
-var $deleteModal = document.querySelector('.delete-modal');
+const $deleteModal = document.querySelector('.delete-modal');
 
-$deleteModal.addEventListener('click', function (event) {
+$deleteModal.addEventListener('click', event => {
   if (event.target.tagName === 'BUTTON') {
     $deleteModalCont.className = 'delete-modal-cont hidden';
   }
@@ -319,16 +319,16 @@ $deleteModal.addEventListener('click', function (event) {
   }
 });
 
-var $searchForm = document.querySelector('.search-form');
-var $searchX = document.querySelector('.search-form i');
-var $searchField = document.querySelector('#search-field');
+const $searchForm = document.querySelector('.search-form');
+const $searchX = document.querySelector('.search-form i');
+const $searchField = document.querySelector('#search-field');
 
 function searchEntries() {
   if ($searchField.value === '') {
     return;
   }
   data.searchMatchEntries = [];
-  for (var s = 0; s < data.entries.length; s++) {
+  for (let s = 0; s < data.entries.length; s++) {
     if (data.entries[s].title.toLowerCase().includes($searchField.value.toLowerCase()) || data.entries[s].notes.toLowerCase().includes($searchField.value.toLowerCase())) {
       data.searchMatchEntries.push(data.entries[s]);
     }
@@ -345,12 +345,12 @@ function clearSearch() {
   $searchForm.reset();
 }
 
-$searchX.addEventListener('click', function (event) {
+$searchX.addEventListener('click', event => {
   clearSearch();
   dataViewSwap('entries');
 });
 
-var $darkModeButton = document.querySelector('#dark-mode-button');
+const $darkModeButton = document.querySelector('#dark-mode-button');
 
 function toggleDarkMode() {
   if (data.darkMode) {
@@ -363,7 +363,7 @@ function toggleDarkMode() {
 
 $darkModeButton.addEventListener('click', toggleDarkMode);
 
-window.addEventListener('beforeunload', function (event) {
-  var dataJson = JSON.stringify(data);
+window.addEventListener('beforeunload', event => {
+  const dataJson = JSON.stringify(data);
   localStorage.setItem('data-obj', dataJson);
 });
